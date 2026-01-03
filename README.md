@@ -20,7 +20,7 @@ A Model Context Protocol (MCP) server that integrates Google's Gemini API with A
 ### 1. Clone or Download
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/Snehasis4321/gemini-mcp-server
 cd gemini-mcp-server
 ```
 
