@@ -20,7 +20,7 @@ A Model Context Protocol (MCP) server that integrates Google's Gemini API with A
 ### 1. Clone or Download
 
 ```bash
-git clone https://github.com/Snehasis4321/gemini-mcp-server
+git clone <your-repo-url>
 cd gemini-mcp-server
 ```
 
@@ -38,6 +38,21 @@ pnpm install
 2. Click "Create API Key" or "Get API Key"
 3. Copy your API key for use in the configuration steps below
 
+### 4. Find Your Repository Path
+
+Before configuring MCP clients, you need to get the absolute path to your cloned repository. Run this command in your terminal:
+
+```bash
+pwd
+```
+
+This will output your current directory path. For example:
+```
+/Downloads/projects/gemini-mcp-server
+```
+
+**Copy this path** - you'll use it in the MCP client configurations below. Replace `cloned_repo_location` with this actual path in all configuration examples.
+
 ## Integration with MCP Clients
 
 ### Kiro
@@ -51,7 +66,7 @@ Add this to your Kiro MCP configuration file:
   "mcpServers": {
     "gemini": {
       "command": "node",
-      "args": ["/absolute/path/to/gemini-mcp-server/src/index.js"],
+      "args": ["/cloned_repo_location/gemini-mcp-server/src/index.js"],
       "env": {
         "GEMINI_API_KEY": "your_api_key_here",
         "GEMINI_MODEL": "gemini-2.5-flash"
@@ -63,7 +78,7 @@ Add this to your Kiro MCP configuration file:
 }
 ```
 
-**Note**: Replace `/absolute/path/to/gemini-mcp-server` with the actual path on your system. You can optionally set `GEMINI_MODEL` to use a different model (e.g., `gemini-3-pro-preview`).
+**Note**: Replace `/cloned_repo_location/gemini-mcp-server` with the actual path on your system. You can optionally set `GEMINI_MODEL` to use a different model (e.g., `gemini-3-pro-preview`).
 
 After adding the configuration:
 1. Open Kiro's MCP Server view in the feature panel
@@ -84,7 +99,7 @@ Add this to your Claude Desktop configuration file:
   "mcpServers": {
     "gemini": {
       "command": "node",
-      "args": ["/absolute/path/to/gemini-mcp-server/src/index.js"],
+      "args": ["/cloned_repo_location/gemini-mcp-server/src/index.js"],
       "env": {
         "GEMINI_API_KEY": "your_api_key_here",
         "GEMINI_MODEL": "gemini-2.5-flash"
@@ -113,7 +128,7 @@ Add this to your Cursor MCP configuration file:
   "mcpServers": {
     "gemini": {
       "command": "node",
-      "args": ["/absolute/path/to/gemini-mcp-server/src/index.js"],
+      "args": ["/cloned_repo_location/gemini-mcp-server/src/index.js"],
       "env": {
         "GEMINI_API_KEY": "your_api_key_here",
         "GEMINI_MODEL": "gemini-2.5-flash"
@@ -142,7 +157,7 @@ Add this to your VS Code MCP configuration file:
   "mcpServers": {
     "gemini": {
       "command": "node",
-      "args": ["/absolute/path/to/gemini-mcp-server/src/index.js"],
+      "args": ["/cloned_repo_location/gemini-mcp-server/src/index.js"],
       "env": {
         "GEMINI_API_KEY": "your_api_key_here",
         "GEMINI_MODEL": "gemini-2.5-flash"
@@ -166,7 +181,7 @@ For any other MCP-compatible client, use the standard MCP server configuration f
   "mcpServers": {
     "gemini": {
       "command": "node",
-      "args": ["/absolute/path/to/gemini-mcp-server/src/index.js"],
+      "args": ["/cloned_repo_location/gemini-mcp-server/src/index.js"],
       "env": {
         "GEMINI_API_KEY": "your_api_key_here",
         "GEMINI_MODEL": "gemini-2.5-flash"
