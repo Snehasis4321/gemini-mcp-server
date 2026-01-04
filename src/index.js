@@ -70,15 +70,19 @@ server.tool(
 
 server.tool(
   "search",
-  "Search for information using Gemini with web search capabilities",
+  "Search for current information using Gemini with real-time web search capabilities",
   {
     query: z.string().describe("The search query"),
   },
   async ({ query }) => {
     try {
+      // Use Gemini with Google Search grounding for real-time information
       const response = await ai.models.generateContent({
         model: MODEL,
-        contents: `Search and provide information about: ${query}\n\nProvide a comprehensive answer with relevant details.`,
+        contents: `Search the web for current information about: ${query}`,
+        config: {
+          tools: [{ type: 'google_search' }],
+        },
       });
 
       const text = response.text;
@@ -92,7 +96,53 @@ server.tool(
         ],
       };
     } catch (error) {
-      throw new Error(`Search failed: ${error.message}`);
+      // Fallback to knowledge-based search if web search fails
+      try {
+        const fallbackResponse = await ai.models.generateContent({
+          model: MODEL,
+          contents: `Based on your knowledge, provide information about: ${query}\n\nNote: This is based on training data, not real-time web search.`,
+        });
+
+        return {
+          content: [
+            {
+              type: "text",
+              text: `⚠️ Web search unavailable, using knowledge base:\n\n${fallbackResponse.text}`,
+            },
+          ],
+        };
+      } catch (fallbackError) {
+        throw new Error(`Search failed: ${error.message}`);
+      }
+    }
+  }
+);
+
+server.tool(
+  "knowledge",
+  "Query Gemini's knowledge base (training data) without web search",
+  {
+    query: z.string().describe("The knowledge query"),
+  },
+  async ({ query }) => {
+    try {
+      const response = await ai.models.generateContent({
+        model: MODEL,
+        contents: `Based on your training data and knowledge, provide information about: ${query}\n\nProvide a comprehensive answer with relevant details.`,
+      });
+
+      const text = response.text;
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: text,
+          },
+        ],
+      };
+    } catch (error) {
+      throw new Error(`Knowledge query failed: ${error.message}`);
     }
   }
 );

@@ -5,7 +5,8 @@ A Model Context Protocol (MCP) server that integrates Google's Gemini API with A
 ## Features
 
 - **Chat**: Multi-turn conversations with Gemini models
-- **Search**: Query information using Gemini's knowledge
+- **Search**: Real-time web search using Google Search integration
+- **Knowledge**: Query Gemini's knowledge base (training data)
 - **Analyze**: Analyze code, text, or data with AI-powered insights
 - **Generate**: Generate code, documentation, and creative content
 - **Latest Models**: Support for Gemini 3 preview models (gemini-3-pro-preview, gemini-3-flash-preview)
@@ -72,7 +73,7 @@ Add this to your Kiro MCP configuration file:
         "GEMINI_MODEL": "gemini-2.5-flash"
       },
       "disabled": false,
-      "autoApprove": ["chat", "search", "analyze", "generate"]
+      "autoApprove": ["chat", "search", "analyze", "generate", "knowledge"]
     }
   }
 }
@@ -217,7 +218,7 @@ Send messages to Gemini with optional conversation history for multi-turn conver
 
 ### search
 
-Search for information using Gemini's knowledge base.
+Search for current information using real-time web search powered by Google Search.
 
 **Parameters:**
 - `query` (string, required): The search query
@@ -225,9 +226,27 @@ Search for information using Gemini's knowledge base.
 **Example:**
 ```javascript
 {
-  "query": "What are the latest features in Gemini 2.0?"
+  "query": "What are the latest AI developments in 2025?"
 }
 ```
+
+**Note**: This tool uses Google Search integration for real-time information. If web search is unavailable, it falls back to knowledge base with a warning.
+
+### knowledge
+
+Query Gemini's knowledge base (training data) without web search.
+
+**Parameters:**
+- `query` (string, required): The knowledge query
+
+**Example:**
+```javascript
+{
+  "query": "Explain the concept of machine learning"
+}
+```
+
+**Note**: This tool uses only Gemini's training data and doesn't access real-time information.
 
 ### analyze
 

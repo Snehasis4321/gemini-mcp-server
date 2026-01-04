@@ -27,7 +27,7 @@ Edit `~/.kiro/settings/mcp.json`:
       "args": ["/absolute/path/to/gemini-mcp-server/src/index.js"],
       "env": {"GEMINI_API_KEY": "YOUR_KEY_HERE"},
       "disabled": false,
-      "autoApprove": ["chat", "search", "analyze", "generate"]
+      "autoApprove": ["chat", "search", "analyze", "generate", "knowledge"]
     }
   }
 }
@@ -72,14 +72,16 @@ Edit the Cline settings file at:
 ## Step 5: Test It!
 
 Try asking your AI assistant:
-- "Use Gemini to search for the latest JavaScript features"
+- "Use Gemini to search for the latest JavaScript features" (real-time web search)
+- "Use Gemini knowledge to explain React concepts" (knowledge base)
 - "Analyze this code with Gemini"
 - "Generate a React component using Gemini"
 
 ## Available Tools
 
 - `chat` - Multi-turn conversations
-- `search` - Information queries
+- `search` - Real-time web search with Google Search
+- `knowledge` - Query Gemini's knowledge base (training data)
 - `analyze` - Code/text/data analysis
 - `generate` - Content generation
 
